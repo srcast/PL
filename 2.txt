@@ -1,0 +1,98 @@
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+	
+	int n, menor, ncomp;
+
+	printf("Insira um N: ");
+	scanf("%d", &n);
+	
+	
+	printf("Insira um numero: ");
+	scanf("%d", &menor);
+
+	
+	
+	do {
+		printf("Insira um numero: ");
+		scanf("%d", &ncomp);
+		
+		if(ncomp < menor){
+			menor = ncomp;
+		}
+		
+		n = n - 1;
+	} while (n > 1);
+	
+	printf("Menor: %d", menor);
+}
+
+
+
+	pushi 0				{"n" = 0, "menor" = 1, "ncomp" = 2}
+	pushi 0				soma = 3
+	pushi 0
+start
+	pushs "Insira um N: \n"
+	writes
+	read
+	atoi
+	storeg 0
+
+	pushs "Insira um numero: \n"
+	writes
+	read
+	atoi
+	storeg 1
+
+	ciclo:
+		pushs "Insira um numero: \n"
+		read
+		atoi
+		storeg 2
+
+		pushg 2
+		pushg 1
+		inf
+		jz if_fim
+		pushg 2
+		storeg 1
+
+	if_fim:
+		pushg 0
+		pushi 1
+		sub
+		pushg 0
+	
+	pushg 0
+	pushi 1
+	sup
+	jz ciclo
+
+	pushs "Menor : \n"
+	writes
+	pushg 1
+	writei
+stop
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+	int n, mul = 1, i = 0, valor;
+
+	printf("Insira um numero: ");
+	scanf("%d", &n);
+
+	do{
+		
+		printf("Insira um valor: ");
+		scanf("%d", &valor);
+
+		mul = mul * valor;
+		
+		i = i + 1;
+	} while(i < n);
+
+	printf("Resultado: %d\n", mul);
+	
+}
+
+
+	pushi 0
+	pushi 1				{"n":0, "mul":1, "i":2, "valor":3}
+	pushi 0
+	pushi 0
+start
+	pushs "Insira um numero: \n"
+	writes
+	read
+	atoi
+	storeg 0
+
+	ciclo:
+		pushs "Insira um valor: \n"
+		writes
+		read
+		atoi
+		storeg 3
+
+		pushg 1
+		pushg 3
+		mul
+		storeg 1       atribuicao
+
+		pushg 2
+		pushi 1
+		add
+		storeg 2
+
+		pushg 2
+		pushg 0
+		inf
+		jz ciclo
+
+		pushs "Resultado: %d\n"
+		writes                          //talvez esteja mal aqui
+		pushg 1
+		writei
+stop
+

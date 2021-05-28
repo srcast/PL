@@ -1,0 +1,13 @@
+int n;
+int mul = 1;
+int i = 0;
+
+mul = 5 * 3 + mul;
+
+printf("kjc");
+
+scanf("%d", &mul);
+
+if(1 < 3){
+	printf("verdade");
+}

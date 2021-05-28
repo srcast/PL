@@ -1,0 +1,76 @@
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+	
+	int l1, l2, l3, l4;
+
+	printf("Digite o lado 1: \n");
+	scanf("%i", &l1);
+
+	printf("Digite o lado 2: \n");
+	scanf("%i", &l2);
+
+	printf("Digite o lado 3: \n");
+	scanf("%i", &l3);
+
+	printf("Digite o lado 4: \n");
+	scanf("%i", &l4);
+
+	if (l1 == l2 && l1 == l3 && l1 == l4){
+		printf("Sao os lados de um quadrado\n");
+	}
+
+	else{
+		printf("Nao sao os lados de um quadrado\n");
+	}
+	
+}
+
+
+	pushi 0
+	pushi 0				{"l1":0, "l2":1, "l3":2, "l4":3}
+	pushi 0
+	pushi 0
+start
+	pushs "Digite o lado 1: \n"
+	writes
+	read
+	atoi
+	storeg 0
+
+	pushs "Digite o lado 2: \n"
+	writes
+	read
+	atoi
+	storeg 1
+
+	pushs "Digite o lado 3: \n"
+	writes
+	read
+	atoi
+	storeg 2
+
+	pushs "Digite o lado 4: \n"
+	writes
+	read
+	atoi
+	storeg 3 //termina de ler os lados
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
