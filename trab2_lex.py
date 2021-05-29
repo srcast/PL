@@ -2,8 +2,7 @@ import ply.lex as lex
 
 tokens = ['INT', 'FLOAT', 'NUM', 'REAL', 'ID', 'IGUAL', 'PV', 'VIR', 'ADD', 'SUB',
           'MUL', 'DIV', 'PRINT', 'PE', 'PD', 'ASPAS', 'SCAN', 'ENDID',
-          'CE', 'CD', 'GT', 'GE', 'LT', 'LE', 'EQ', 'DIF', 'DO', 'WHILE', 'TEXTO',
-          'OR']
+          'CE', 'CD', 'GT', 'GE', 'LT', 'LE', 'EQ', 'DIF', 'DO', 'WHILE', 'TEXTO', 'IF']
 
 t_INT = r'int'
 t_FLOAT = r'float'
@@ -34,10 +33,11 @@ t_EQ = r'=='
 t_DIF = r'!='
 t_DO = r'do'
 t_WHILE = r'while'
-t_OR = r'||'
+t_IF = r'^if'
 
 
 t_ignore = " \t\n" #--------------------
+
 
 def t_error(t):
     print("Carácter ilegal: ", t.value[0])

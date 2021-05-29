@@ -1,4 +1,7 @@
+import sys
+
 import ply.yacc as yacc
+import sys
 
 from trab2_lex import tokens
 
@@ -60,7 +63,7 @@ def p_SegueIgual_real(p):
 
 def p_BlocoInst_inst(p):
     "BlocoInst : Inst BlocoInst"
-    p[0] = p[1]
+    p[0] = p[1] + p[2]
 
 def p_BlocoInst_vazio(p): ##############################3
     "BlocoInst : "
@@ -78,9 +81,9 @@ def p_Inst_ler(p):
     "Inst : Scanf"
     p[0] = p[1]
 
-#def p_Inst_if(p):
-#    "Inst : If"
-#    p[0] = p[1]
+def p_Inst_if(p):
+    "Inst : If"
+    p[0] = p[1]
 
 #def p_Inst_dowhile(p):
 #    "Inst : DoWhile"
@@ -158,23 +161,86 @@ def p_RestoScanf_pd(p):
     p[0] = "\n"
 
 
-p34: If -> IF PE Cond PD CE BlocoInstIf CD
-p35: Cond  -> Cond OR Cond2
-p36:       | Cond2
+
+
+
 
 def p_If_if(p):
-    "If : IF PE Cond PD CE BlocoInstIf CD"
-    p[0] = p[3] + "\n" + p[6]
+    "If : IF Cond CE BlocoInstIf CD"
+    parser.somaIf += 1
+    p[0] = p[2] + "\nJZ ENDIF" + str(parser.somaIf) + "\n" + p[4] + "\nENDIF" + str(parser.somaIf) + ":\n"
 
-def p_Cond_cond(p):
-    "Cond : Cond2 OR Cond2"
+def p_Cond_exp(p):
+    "Cond : PE Conta ExpRel Conta PD"
+    p[0] = p[2] + p[4] + p[3]
 
+def p_Cond_conta(p):
+    "Cond : Conta"
+    p[0] = p[1]
 
+def p_ExpRel_gt(p):
+    "ExpRel : GT"
+    p[0] = "SUP\n"
 
+def p_ExpRel_ge(p):
+    "ExpRel : GE"
+    p[0] = "SUPEQ\n"
 
+def p_ExpRel_lt(p):
+    "ExpRel : LT"
+    p[0] = "INF\n"
 
+def p_ExpRel_le(p):
+    "ExpRel : LE"
+    p[0] = "INFEQ\n"
 
+def p_ExpRel_eq(p):
+    "ExpRel : EQ"
+    p[0] = "EQUAL\n"
 
+def p_ExpRel_dif(p): #########################################################
+    "ExpRel : DIF"
+    p[0] = "EQUAL\n" + "NOT\n"
+
+def p_Conta_pe(p):
+    "Conta : PE Conta2 PD"
+    p[0] = p[2]
+
+def p_Conta_conta2(p):
+    "Conta : Conta2"
+    p[0] = p[1]
+
+def p_Conta2_sub(p):
+    "Conta2 : Exp SUB Exp"
+    p[0] = p[1] + p[3] + "SUB\n"
+
+def p_Conta2_add(p):
+    "Conta2 : Exp ADD Exp"
+    p[0] = p[1] + p[3] + "ADD\n"
+
+def p_Conta2_exp(p):
+    "Conta2 : Exp"
+    p[0] = p[1]
+
+def p_BlocoInstIf_inst(p):
+    "BlocoInstIf : InstBlocoIf BlocoInstIf"
+    p[0] = p[1] + p[2]
+
+def p_BlocoInstIf_vazio(p):
+    "BlocoInstIf : "
+    p[0] = ""
+
+def p_InstBlocoIf_atr(p):
+    "InstBlocoIf : Atribuicao"
+    p[0] = p[1]
+
+def p_InstBlocoIf_print(p):
+    "InstBlocoIf : Printf"
+    p[0] = p[1]
+
+def p_InstBlocoIf_scan(p):
+    "InstBlocoIf : Scanf"
+    p[0] = p[1]
 
 #error rule for syntax errors
 def p_error(p):

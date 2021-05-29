@@ -40,6 +40,7 @@ P27:			|PV
 
 
 p19: Atribuicao -> ID IGUAL RestoAtri PV
+	RestoAtri -> Exp ADD Exp PV
 p20:			| Exp SUB Exp PV
 P21:			| Exp PV
 
@@ -68,16 +69,32 @@ p31: Scanf		-> SCAN PE TEXTO VIR ENDID RestoScanf
 p32: RestoScanf ->  PD PV
 
 
+p34: If -> IF PE Cond PD CE BlocoInstIf CD
+p35: Cond  -> Conta ExpRel Conta
+			| Conta
+p43: ExpRel ->   GT       '>'
+p44: 			| GE      '>='
+p45:			| LT     '<'
+p46: 			| LE      '<='
+p47:			| EQ      '=='
+p48:			| DI      '!='
+
+p19: Conta -> PE Conta2 PD
+			|Conta2
+
+p20: Conta2 ->  Exp SUB Exp
+				| Exp ADD Exp
+P21:			| Exp
+
+p49: BlocoInstIf -> Inst BlocoInstIf
+p50: 				| E
 
 
 
 
 
 
-
-
-
-
+-------------------------------------------------------------------------------
 p34: If -> IF PE Cond PD CE BlocoInstIf CD
 p35: Cond  -> Cond OR Cond2
 p36:       | Cond2
@@ -95,7 +112,7 @@ p48:				| DIF Exp      '!='
 
 p49: BlocoInstIf -> Inst BlocoInstIf
 p50: 				| E
-
+-----------------------------------------------------------------------------
 
 p51: DoWhile -> DO CE BlocoDoWhile CD WHILE PE Cond PD PV
 p52:BlocoDoWhile -> Inst BlocoDoWhile
