@@ -85,9 +85,9 @@ def p_Inst_if(p):
     "Inst : If"
     p[0] = p[1]
 
-#def p_Inst_dowhile(p):
-#    "Inst : DoWhile"
-#    p[0] = p[1]
+def p_Inst_dowhile(p):
+    "Inst : DoWhile"
+    p[0] = p[1]
 
 
 
@@ -132,8 +132,12 @@ def p_Exp2_real(p):
     "Exp2 : REAL"
     p[0] = "PUSHF " + str(p[1]) + "\n"
 
+
+
+
+
 def p_Printf_print(p):
-    "Printf : PRINT PE TEXTO RestoPrintf"
+    "Printf : PRINT PE TEXT RestoPrintf"
     p[0] = "PUSHS " + p[3] + "\n" + "WRITES" + "\n" + p[4]
 
 def p_RestoPrintf_pd(p):
@@ -148,8 +152,12 @@ def p_RestoPrintf_id(p):
         p[0] = "PUSHG " + str(p.parser.registos.get(p[2])) + "\n" + "WRITEF" + "\n"
 
 
+
+
+
+
 def p_Scanf_scanf(p):
-    "Scanf : SCAN PE TEXTO VIR ENDID RestoScanf"
+    "Scanf : SCAN PE TEXT VIR ENDID RestoScanf"
     nome = p[5]
     if (str(p.parser.tipos.get(nome[1:])) == "int"):
         p[0] = "READ\n" + "ATOI\n" + "STOREG " + str(p.parser.registos.get(nome[1:])) + p[6]
@@ -165,10 +173,11 @@ def p_RestoScanf_pd(p):
 
 
 
+
 def p_If_if(p):
     "If : IF Cond CE BlocoInstIf CD"
     parser.somaIf += 1
-    p[0] = p[2] + "\nJZ ENDIF" + str(parser.somaIf) + "\n" + p[4] + "\nENDIF" + str(parser.somaIf) + ":\n"
+    p[0] = p[2] + "\nJZ ENDIF" + str(parser.somaIf) + "\n" + p[4] + "\nEndIf" + str(parser.somaIf) + ":\n"
 
 def p_Cond_exp(p):
     "Cond : PE Conta ExpRel Conta PD"
@@ -242,6 +251,45 @@ def p_InstBlocoIf_scan(p):
     "InstBlocoIf : Scanf"
     p[0] = p[1]
 
+def p_InstBlocoIf_if(p):
+    "InstBlocoIf : If"
+    p[0] = p[1]
+
+
+
+
+
+
+
+def p_DoWhile_do(p):
+    "DoWhile : DO CE BlocoDoWhile CD WHILE Cond PV"
+    parser.somaDoWhile += 1
+    p[0] = "DoWhile" + str(parser.somaIf) + ":\n" + p[3] + "\n" + p[6] + "\nEndDoWhile" + str(parser.somaIf) + ":\n"
+
+def p_BlocoDoWhile_inst(p):
+    "BlocoDoWhile : InstBlocoDo BlocoDoWhile"
+    p[0] =p[1] + p[2]
+
+def p_BlocoDoWhile_vazio(p):
+    "BlocoDoWhile : "
+    p[0] = ""
+
+def p_InstBlocoDo_atr(p):
+    "InstBlocoDo : Atribuicao"
+    p[0] = p[1]
+
+def p_InstBlocoDo_print(p):
+    "InstBlocoDo : Printf"
+    p[0] = p[1]
+
+def p_InstBlocoDo_scan(p):
+    "InstBlocoDo : Scanf"
+    p[0] = p[1]
+
+def p_InstBlocoDo_if(p):
+    "InstBlocoDo : If"
+    p[0] = p[1]
+
 #error rule for syntax errors
 def p_error(p):
     print("Syntax error in input: ", p)
@@ -262,7 +310,7 @@ res = open("res.txt", "w")
 #reading input
 for linha in f:
     resultado = parser.parse(linha)
-    res.write(resultado)
+    res.write(str(resultado))
 
 for elem in parser.registos:
     print(elem + ": " + str(parser.registos.get(elem)))
