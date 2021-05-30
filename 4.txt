@@ -1,23 +1,86 @@
-#include <stdio.h>
+int n;
+int impares = 0;
+int valor;
 
-int main(int argc, char const *argv[])
-{
-	int seq[11] = {13, 45, 145, 37, 49, 0, 22, 46, 19, 76, 11, 28};
-	int conta = 0, i = 0;
 
-	do{
-		
-		if(seq[i] % 2 != 0){
-			printf("%d ", seq[i]);
-			conta += 1;
-		}
-		
 
-		i++;
-	} while(i < (sizeof(seq) / sizeof(seq[0])));
-	
-	printf("\nImpares: %d\n", conta);
+printf("Insira um N: \n");
+scanf("%d", &n);
 
-	return 0;
-	
-}
+do{
+    printf("Insira um valor: \n");
+    scanf("%d", &valor);
+
+    if((valor % 2) != 0){
+        printf("N = %d\n", valor);
+        impares = impares + 1;
+    }
+
+    n = n - 1;
+} while (n > 0);
+
+printf("imapres: %d\n", impares);
+
+--------------------------------------------------------- 
+
+pushi 0
+pushi 0
+pushi 0
+
+start
+    pushs "Insira um N"
+    writes
+    read
+    atoi
+    storeg 0
+
+    do:
+        pushs "\nInsira um valor: "
+        writes
+        read
+        atoi
+        storeg 2
+
+        pushg 2
+        pushi 2
+        mod
+        pushi 0
+        equal  
+        not
+        jz fimif
+
+        pushs "\nN = "
+        writes
+        pushg 2
+        writei
+        
+        pushg 1
+        pushi 1
+        add
+        storeg 1
+
+        fimif:
+        pushg 0
+        pushi 1
+        sub
+        storeg 0        
+
+        pushg 0
+        pushi 0
+        infeq
+        jz do
+
+    pushs "\nimpares: "
+    writes
+    pushg 1
+    writei
+stop
+
+
+
+
+
+
+
+
+    

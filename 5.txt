@@ -1,0 +1,92 @@
+int n[5] = [1,2,3,4,5]
+
+
+
+
+int i = 0;
+
+do{
+    printf("Insira um valor: \n");
+    scanf("%d", n[i])
+
+    i = i + 1;
+
+} while (i < 5);
+
+do{
+    i = i - 1;
+    printf("valor: %d\n", n[i]);
+} while(i > 0);
+
+----------------------------------------------------------------
+
+pushn 5
+pushi 0
+
+start
+    do:
+        pushs "Insira um valor: \n");
+        writes
+        read
+        atoi
+        pushgp 
+        pushi 0
+        padd
+        pushg 1
+        storen
+
+        pushg 1
+        pushi 1
+        add
+        storeg 1
+
+        pushg 1
+        pushi 5
+        supeq
+        jz do
+
+    do2:
+        pushg 1
+        pushi 1
+        sub
+        storeg 1
+
+
+        pushs "valor: \n");
+        writes
+        pushgp 
+        pushi 0
+        padd
+        pushg 1
+        loadn
+        writei
+
+        pushg 1
+        pushi 0
+        infeq
+        jz do2
+stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
