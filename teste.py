@@ -7,7 +7,7 @@ from trab2_lex import tokens
 
 
 #Production rules
-def p_File(p): #############################################
+def p_File(p):
     "File : Inic BlocoInst"
     p[0] = p[1] + p[2]
 
@@ -148,7 +148,7 @@ def p_BlocoInst_inst(p):
     "BlocoInst : Inst BlocoInst"
     p[0] = "START\n" + p[1] + p[2]
 
-def p_BlocoInst_vazio(p): ##############################3
+def p_BlocoInst_vazio(p):
     "BlocoInst : "
     p[0] = ""
 
@@ -232,6 +232,14 @@ def p_Exp2_num(p):
 def p_Exp2_real(p):
     "Exp2 : REAL"
     p[0] = "PUSHF " + str(p[1]) + "\n"
+
+def p_Exp2_idarray_num(p):
+    "Exp2 : ID RE NUM RD"
+    p[0] = "PUSHGP\n" + "PUSHI " + str(p.parser.registos.get(p[1])) + "\nPADD\n" + "PUSHG " + p[3] + "\nLOADN\n"
+
+def p_Exp2_idarray_id(p):
+    "Exp2 : ID RE ID RD"
+    p[0] = "PUSHGP\n" + "PUSHI " + str(p.parser.registos.get(p[1])) + "\nPADD\n" + "PUSHG " + str(p.parser.registos.get(p[3])) + "\nLOADN\n"
 
 
 
