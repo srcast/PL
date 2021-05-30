@@ -1,13 +1,36 @@
-
-
 p1:	File 	   -> Inic BlocoInst
 
 p2:	Inic 	   -> DeclVar Inic
 p3:		   		| E
-p4:	DeclVar    -> INT ID OpcDeclInt
-p5:				| FLOAT ID OpcDeclFloat
+
+p4:	DeclVar    -> INT RestoDeclInt
+p5:				| FLOAT RestoDeclFloat
+
+RestoDeclInt -> ID OpcDeclInt
+				|IDARRAY RestoArrayInt
+
+RestoArrayInt -> IGUAL SegueIgualArrayInt
+				|PV
+
+SegueIgualArrayInt -> RE NUM ConteudoArrayInt RD PV
+
+ConteudoArrayInt -> VIR NUM ConteudoArrayInt
+					| E
+
 p6:	OpcDeclInt  -> IGUAL SegueIgual
 p7:				| PV	
+
+RestoDeclFloat -> ID OpcDeclFloat
+				|IDARRAY RestoArrayFloat
+
+RestoArrayFloat -> IGUAL SegueIgualArrayFloat
+				|PV
+
+SegueIgualArrayFloat -> RE REAL ConteudoArrayFloat RD PV
+
+ConteudoArrayFloat -> VIR REAL ConteudoArrayFloat
+					| E
+
 p8:	OpcDeclFloat  -> IGUAL SegueIgual
 p9:				| PV		
 p10:SegueIgual -> NUM PV
@@ -25,21 +48,8 @@ p18:		| DoWhile
 
 
 
----------------------------------------------------------------
 p19: Atribuicao -> ID IGUAL RestoAtri
-p20: RestoAtri -> ID Operacao 
-p21:			| NUM Operacao
-P22:			| REAL Operacao
-
-p23:Operacao -> ADD RestoAtri
-p24:			|SUB RestoAtri
-p25:			|MUL RestoAtri
-p26:			|DIV RestoAtri
-P27:			|PV
-----------------------------------------------------------------
-
-
-p19: Atribuicao -> ID IGUAL RestoAtri PV
+					|IDARRAY IGUAL RestoAtri
 	RestoAtri -> Exp ADD Exp PV
 p20:			| Exp SUB Exp PV
 P21:			| Exp PV
@@ -52,18 +62,12 @@ p26: Exp2 -> ID
 p27:		|NUM
 p28:		|REAL
 
-
-
-----------------------------------------------------------------
-
 P28: Printf 	 -> PRINT PE TEXTO RestoPrintf
 p29: RestoPrintf -> PD PV
-p30:			| VIR ID RestoPrintf
-----------------------------------------------------------------
+p30:			| VIR ContPrintf
 
-P28: Printf 	 -> PRINT PE TEXTO RestoPrintf
-p29: RestoPrintf -> PD PV
-p30:			| VIR ID PD PV
+ContPrintf -> ID PD PV
+			| IDARRAY PD PV
 
 p31: Scanf		-> SCAN PE TEXTO VIR ENDID RestoScanf
 p32: RestoScanf ->  PD PV
@@ -91,6 +95,29 @@ p50: 				| E
 
 
 
+p51: DoWhile -> DO CE BlocoDoWhile CD WHILE PE Cond PD PV
+p52:BlocoDoWhile -> Inst BlocoDoWhile
+p53:				| E
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -114,12 +141,40 @@ p49: BlocoInstIf -> Inst BlocoInstIf
 p50: 				| E
 -----------------------------------------------------------------------------
 
-p51: DoWhile -> DO CE BlocoDoWhile CD WHILE PE Cond PD PV
-p52:BlocoDoWhile -> Inst BlocoDoWhile
-p53:				| E
+----------------------------------------------------------------
+
+P28: Printf 	 -> PRINT PE TEXTO RestoPrintf
+p29: RestoPrintf -> PD PV
+p30:			| VIR ID RestoPrintf
+----------------------------------------------------------------
 
 
 
+---------------------------------------------------------------
+p19: Atribuicao -> ID IGUAL RestoAtri
+p20: RestoAtri -> ID Operacao 
+p21:			| NUM Operacao
+P22:			| REAL Operacao
+
+p23:Operacao -> ADD RestoAtri
+p24:			|SUB RestoAtri
+p25:			|MUL RestoAtri
+p26:			|DIV RestoAtri
+P27:			|PV
+----------------------------------------------------------------
 
 
 
+p1:	File 	   -> Inic BlocoInst
+
+p2:	Inic 	   -> DeclVar Inic
+p3:		   		| E
+p4:	DeclVar    -> INT ID OpcDeclInt
+p5:				| FLOAT ID OpcDeclFloat
+p6:	OpcDeclInt  -> IGUAL SegueIgual
+p7:				| PV	
+p8:	OpcDeclFloat  -> IGUAL SegueIgual
+p9:				| PV		
+p10:SegueIgual -> NUM PV
+p11:			| REAL PV
+---------------------------------------------------------------

@@ -12,7 +12,7 @@ reservadas = {
 
 tokens = ['NUM', 'REAL', 'ID', 'IGUAL', 'PV', 'VIR', 'ADD', 'SUB',
           'MUL', 'DIV', 'PE', 'PD', 'ENDID', 'CE', 'CD', 'GT', 'GE', 'LT',
-          'LE', 'EQ', 'DIF', 'TEXT']
+          'LE', 'EQ', 'DIF', 'TEXT', 'IDARRAY']
 
 tokens += list(reservadas.values())
 
@@ -37,6 +37,11 @@ t_LE = r'<='
 t_EQ = r'=='
 t_DIF = r'!='
 
+def t_IDARRAY(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*\[\d+\]'
+    t.type = reservadas.get(t.value, 'IDARRAY')  # Check for reserved words
+    return t
+
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
@@ -45,7 +50,7 @@ def t_ID(t):
 
 
 def t_TEXT(t):
-    r'"[\W\w]*"'
+    r'"[\w\W]*"'
     t.type = reservadas.get(t.value, 'TEXT')  # Check for reserved words
     return t
 
