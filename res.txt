@@ -1,14 +1,8 @@
 PUSHI 0
-START
 PUSHI 0
-START
 PUSHI 0
-START
 PUSHI 0
-START
 PUSHI 0
-START
-START
 START
 PUSHS "Digite o lado 1: \n"
 WRITES
@@ -17,11 +11,60 @@ READ
 ATOI
 STOREG 0
 START
-START
 PUSHS "Digite o lado 2: \n"
 WRITES
 START
 READ
 ATOI
 STOREG 1
+START
+PUSHS "Digite o lado 3: \n"
+WRITES
+START
+READ
+ATOI
+STOREG 2
+START
+PUSHS "Digite o lado 4: \n"
+WRITES
+START
+READ
+ATOI
+STOREG 3
+START
+PUSHG 0
+PUSHG 1
+EQUAL
+
+JZ Endif3
+PUSHG 0
+PUSHG 2
+EQUAL
+
+JZ Endif2
+PUSHG 0
+PUSHG 3
+EQUAL
+
+JZ Endif1
+PUSHS "Sao os lados de um quadrado\n"
+WRITES
+PUSHI 1
+STOREG 4
+
+Endif1:
+
+Endif2:
+
+Endif3:
+START
+PUSHG 4
+PUSHI 0
+EQUAL
+
+JZ Endif4
+PUSHS "Nao sao os lados de um quadrado\n"
+WRITES
+
+Endif4:
 STOP

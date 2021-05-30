@@ -1,23 +1,19 @@
-#include <stdio.h>
 
-int main(int argc, char const *argv[])
-{
-	int seq[11] = {13, 45, 145, 37, 49, 0, 22, 46, 19, 76, 11, 28};
-	int conta = 0, i = 0;
 
-	do{
-		
-		if(seq[i] % 2 != 0){
-			printf("%d ", seq[i]);
-			conta += 1;
-		}
-		
 
-		i++;
-	} while(i < (sizeof(seq) / sizeof(seq[0])));
-	
-	printf("\nImpares: %d\n", conta);
+int n[6];
+int impares = 0;
+int valor;
+int i = 0;
 
-	return 0;
-	
-}
+
+printf("Insira os valores: \n");
+
+do{ scanf("%d", &n[i]); i = i + 1; } while (i < 6);
+
+
+do{ i = i - 1; if((n[i] % 2) == 1){impares = impares + 1; printf("%d\n", n[i]) } } while(i > 0);
+
+
+printf("impares: %d\n", impares);
+

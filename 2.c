@@ -1,29 +1,16 @@
-#include <stdio.h>
+int n;
+int menor;
+int ncomp;
 
-int main(int argc, char const *argv[])
-{
+printf("Insira um N: \n");
+scanf("%d", &n);
 	
-	int n, menor, ncomp, *ar;
+	
+printf("Insira os numeros: \n");
+scanf("%d", &menor);
 
-	printf("Insira um N: ");
-	scanf("%d", &n);
-	
-	
-	printf("Insira um numero: ");
-	scanf("%d", &menor);
+n = n - 1;
 
+do { scanf("%d", &ncomp); if(ncomp < menor){ menor = ncomp; } n = n - 1;} while (n > 0);
 	
-	
-	do {
-		printf("Insira um numero: ");
-		scanf("%d", &ncomp);
-		
-		if(ncomp < menor){
-			menor = ncomp;
-		}
-		
-		n--;
-	} while (n > 1);
-	
-	printf("Menor: %d", menor);
-}
+printf("Menor: %d ", menor);
